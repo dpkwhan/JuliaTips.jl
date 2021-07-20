@@ -27,6 +27,11 @@ md"""
 # Partial Aplication
 """
 
+# ╔═╡ f87fa4b2-11b8-4535-918b-8b54db14dc60
+html"""
+	<span style="display: block; text-align: right;"><b>David Han</b>: July 20, 2021</span>
+	"""
+
 # ╔═╡ ca5d7300-e8a2-11eb-2288-d773f589cb3d
 html"""
 <article class="firstparagraph">
@@ -48,6 +53,7 @@ html"""
     	padding-right: max(160px, 10%);
 	}
 
+	/* For bullet point inside admonition */
 	pluto-output div.admonition .admonition-title ~ ul {
 		padding-left: 2.5em;
 	}
@@ -197,7 +203,7 @@ filter(endswith(".jl"), readdir());
 md"""
 ### Example 2: Broadcasting a vector over another vector
 
-Below is quoted from Base documentation on function [`in`](https://docs.julialang.org/en/v1/base/collections/#Base.in).
+Below is quoted from Julia Base documentation on function [`in`](https://docs.julialang.org/en/v1/base/collections/#Base.in).
 
 >
 > When broadcasting with `in.(items, collection)` or `items .∈ collection`, 
@@ -224,70 +230,29 @@ in([2, 3]).([1, 2, 3])
 
 # ╔═╡ 17576d88-6fc4-4d3e-a859-c210ef96affe
 md"""
-This technique is quite useful in selecting a subset of rows from a `DataFrame` from package [`DataFrame.jl`](https://github.com/JuliaData/DataFrames.jl).
+This technique is quite useful in selecting a subset of rows from a `DataFrame` from package [`DataFrame.jl`](https://github.com/JuliaData/DataFrames.jl). Below is the population for a few selected states, which is stored as a `DataFrame`.
 """
 
 # ╔═╡ a93c3fa9-5381-4cf3-805d-a10465e318b6
 begin
 	statePopulation = [
-		(state=:CA, population=39776830),
-		(state=:TX, population=28704330),
 		(state=:FL, population=21312211),
 		(state=:NY, population=19862512),
 		(state=:PA, population=12823989),
-		(state=:IL, population=12768320),
-		(state=:OH, population=11694664),
 		(state=:GA, population=10545138),
-		(state=:NC, population=10390149),
 		(state=:MI, population=9991177),
 		(state=:NJ, population=9032872),
 		(state=:VA, population=8525660),
 		(state=:WA, population=7530552),
-		(state=:AZ, population=7123898),
-		(state=:MA, population=6895917),
-		(state=:TN, population=6782564),
-		(state=:IN, population=6699629),
-		(state=:MO, population=6135888),
-		(state=:MD, population=6079602),
-		(state=:WI, population=5818049),
-		(state=:CO, population=5684203),
-		(state=:MN, population=5628162),
-		(state=:SC, population=5088916),
-		(state=:AL, population=4888949),
-		(state=:LA, population=4682509),
-		(state=:KY, population=4472265),
-		(state=:OR, population=4199563),
-		(state=:OK, population=3940521),
 		(state=:CT, population=3588683),
 		(state=:IA, population=3160553),
-		(state=:UT, population=3159345),
-		(state=:NV, population=3056824),
-		(state=:AR, population=3020327),
-		(state=:MS, population=2982785),
-		(state=:KS, population=2918515),
-		(state=:NM, population=2090708),
-		(state=:NE, population=1932549),
-		(state=:WV, population=1803077),
-		(state=:ID, population=1753860),
-		(state=:HI, population=1426393),
-		(state=:NH, population=1350575),
-		(state=:ME, population=1341582),
-		(state=:MT, population=1062330),
-		(state=:RI, population=1061712),
-		(state=:DE, population=971180),
-		(state=:SD, population=877790),
-		(state=:ND, population=755238),
-		(state=:AK, population=738068),
-		(state=:DC, population=703608),
-		(state=:VT, population=623960),
-		(state=:WY, population=573720),
 	]
 	df = DataFrame(statePopulation)
 end
 
 # ╔═╡ cdb2e4bd-36ec-4072-b618-895ccac115bf
 md"""
-Due to some reason, we are particularly interested in the population of the tri-state area, *i.e.* NY, NJ and CT. How to single out the data for these three states? We can use the `in` function discussed above.
+Due to some reason, we are particularly interested in the population of the tri-state area, *i.e.* NY, NJ and CT. How to single out the data for these three states? The `in` function discussed above can be used here.
 """
 
 # ╔═╡ 5a08dda3-0b06-4ae2-ab87-cb6c4092fab9
@@ -393,8 +358,9 @@ end;
 endsection(1)
 
 # ╔═╡ Cell order:
-# ╠═da7b7a29-36c0-4ade-ae66-af42161b680c
 # ╟─d554f41c-534a-4620-a27c-680e715d760f
+# ╟─f87fa4b2-11b8-4535-918b-8b54db14dc60
+# ╠═da7b7a29-36c0-4ade-ae66-af42161b680c
 # ╟─ca5d7300-e8a2-11eb-2288-d773f589cb3d
 # ╟─306a72cf-2c07-4e06-89d3-66e36284c2de
 # ╠═23b6dbd4-656d-4407-b249-f1b4358fdb54
@@ -423,7 +389,7 @@ endsection(1)
 # ╟─742053a8-9d54-4ece-a272-28a592e46cae
 # ╠═f6b1b445-455b-4626-98c6-46882956e2af
 # ╟─17576d88-6fc4-4d3e-a859-c210ef96affe
-# ╟─a93c3fa9-5381-4cf3-805d-a10465e318b6
+# ╠═a93c3fa9-5381-4cf3-805d-a10465e318b6
 # ╟─cdb2e4bd-36ec-4072-b618-895ccac115bf
 # ╟─5a08dda3-0b06-4ae2-ab87-cb6c4092fab9
 # ╠═5c73d81a-91d2-48e2-9e57-8f109eedba0a
