@@ -30,7 +30,7 @@ md"""
 # ╔═╡ f87fa4b2-11b8-4535-918b-8b54db14dc60
 html"""
 	<span style="display: block; text-align: right;"><b>David Han</b>: July 20, 2021</span>
-	"""
+"""
 
 # ╔═╡ ca5d7300-e8a2-11eb-2288-d773f589cb3d
 html"""
@@ -358,8 +358,8 @@ end;
 endsection(1)
 
 # ╔═╡ Cell order:
-# ╟─d554f41c-534a-4620-a27c-680e715d760f
-# ╟─f87fa4b2-11b8-4535-918b-8b54db14dc60
+# ╠═d554f41c-534a-4620-a27c-680e715d760f
+# ╠═f87fa4b2-11b8-4535-918b-8b54db14dc60
 # ╠═da7b7a29-36c0-4ade-ae66-af42161b680c
 # ╟─ca5d7300-e8a2-11eb-2288-d773f589cb3d
 # ╟─306a72cf-2c07-4e06-89d3-66e36284c2de
