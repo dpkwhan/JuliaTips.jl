@@ -95,10 +95,11 @@ html"""
 </style>
 """
 
+# ╔═╡ 0f932493-1aff-44a5-8c57-c650df1ab5d2
+html"""<h2 style="color:red">Overview</h2>"""
+
 # ╔═╡ 306a72cf-2c07-4e06-89d3-66e36284c2de
 md"""
-## Overview
-
 Quoted from [wiki](https://en.wikipedia.org/wiki/Partial_application):
 > In computer science, **partial application** (or **partial function application**) refers to 
 > the process of fixing a number of arguments to a function, producing another function 
@@ -157,18 +158,18 @@ true
 """
 
 # ╔═╡ 46790754-e01a-4a2c-be2f-9c79ffd7c139
-md"""
-## Usage Examples
-"""
+html"""<h2 style="color:red">Usage Examples</h2>"""
 
 # ╔═╡ 0c6a064c-8460-401a-acab-b50a3591c5db
 md"""
 After the warmup with our toy function `lt4`, let's see how partial function application can be used in practice to help us write concise and elegant code.
 """
 
+# ╔═╡ 5028f189-1e10-4442-91fd-e4d83dbf0f97
+html"""<h3 style="color:green;">Example 1: Find all files of a particular type</h3>"""
+
 # ╔═╡ a010ebb9-cad6-48b6-938f-ab2cab2d5284
 md"""
-### Example 1: Find all files of a particular type
 Say you want to get a list of all the Julia scripts in the current directory. How do you do that?
 
 We can use the [`endswith`](https://docs.julialang.org/en/v1/base/strings/#Base.endswith) function to match all files that ends with `.jl`.
@@ -199,10 +200,11 @@ filter(endswith(".jl"), readdir());
 # ╔═╡ 76570b0e-7468-4b83-b46c-e15c62e46833
 
 
+# ╔═╡ 614f0b35-20cb-4e53-bb88-f0039ba3ad11
+html"""<h3 style="color:green;">Example 2: Broadcasting a vector over another vector</h3>"""
+
 # ╔═╡ b8a2be7b-d854-40db-9321-03ac03d09e93
 md"""
-### Example 2: Broadcasting a vector over another vector
-
 Below is quoted from Julia Base documentation on function [`in`](https://docs.julialang.org/en/v1/base/collections/#Base.in).
 
 >
@@ -256,17 +258,13 @@ Due to some reason, we are particularly interested in the population of the tri-
 """
 
 # ╔═╡ 5a08dda3-0b06-4ae2-ab87-cb6c4092fab9
-md"""
-#### Using `Ref`
-"""
+html"""<h4 style="color:blue">Using (<code>Ref</code>)</h4>"""
 
 # ╔═╡ 5c73d81a-91d2-48e2-9e57-8f109eedba0a
 df[in.(df.state, Ref([:NY, :NJ, :CT])), :]
 
 # ╔═╡ 2895c8bc-1563-4622-bb86-56214d029438
-md"""
-#### Using fuction application
-"""
+html"""<h4 style="color:blue">Using fuction application</h4>"""
 
 # ╔═╡ ef09c83e-a60f-49a0-8388-9f39453b9f14
 df[in([:NY, :NJ, :CT]).(df.state), :]
@@ -358,11 +356,12 @@ end;
 endsection(1)
 
 # ╔═╡ Cell order:
-# ╠═d554f41c-534a-4620-a27c-680e715d760f
-# ╠═f87fa4b2-11b8-4535-918b-8b54db14dc60
+# ╟─d554f41c-534a-4620-a27c-680e715d760f
+# ╟─f87fa4b2-11b8-4535-918b-8b54db14dc60
 # ╠═da7b7a29-36c0-4ade-ae66-af42161b680c
 # ╟─ca5d7300-e8a2-11eb-2288-d773f589cb3d
-# ╟─306a72cf-2c07-4e06-89d3-66e36284c2de
+# ╟─0f932493-1aff-44a5-8c57-c650df1ab5d2
+# ╠═306a72cf-2c07-4e06-89d3-66e36284c2de
 # ╠═23b6dbd4-656d-4407-b249-f1b4358fdb54
 # ╟─94b74d59-25ec-4169-9190-4d5bb1d67b7e
 # ╠═1d362ece-2e0e-4dde-8eb0-84aa32515b44
@@ -376,6 +375,7 @@ endsection(1)
 # ╟─a002bc9d-2dc4-41d4-bc2e-dd3dbc30939a
 # ╟─46790754-e01a-4a2c-be2f-9c79ffd7c139
 # ╟─0c6a064c-8460-401a-acab-b50a3591c5db
+# ╟─5028f189-1e10-4442-91fd-e4d83dbf0f97
 # ╟─a010ebb9-cad6-48b6-938f-ab2cab2d5284
 # ╠═1b2d0bd8-8a2d-4a05-bfc1-0c595cc0face
 # ╟─6498bd50-a6b9-4769-8b7f-caa61d6d12f6
@@ -384,6 +384,7 @@ endsection(1)
 # ╟─414209fb-e04b-4269-a532-eb81b5f51bb8
 # ╠═a630bd48-3854-42d5-be42-1ea002aaab52
 # ╟─76570b0e-7468-4b83-b46c-e15c62e46833
+# ╟─614f0b35-20cb-4e53-bb88-f0039ba3ad11
 # ╟─b8a2be7b-d854-40db-9321-03ac03d09e93
 # ╠═144db80c-82a4-4e02-be88-521f5611221f
 # ╟─742053a8-9d54-4ece-a272-28a592e46cae
