@@ -216,20 +216,26 @@ end;
 # ╔═╡ bd0c5981-f0d2-4e2b-abb2-c90641a1ff97
 html"""<h4 style="color:blue">if-else</h4>"""
 
-# ╔═╡ eb481f69-70ac-4fd9-9582-e4e865894b4e
-@benchmark daytype_if_else(many_days, weekenddays)
+# ╔═╡ 4ea98725-9f15-4441-9778-1a7696828d38
+with_terminal() do
+	@btime daytype_if_else(many_days, weekenddays)
+end
 
 # ╔═╡ 2168caf2-ff72-43dd-81b9-bfbe4dc9bd32
 html"""<h4 style="color:blue">ternary operator (<code>?:</code>)</h4>"""
 
 # ╔═╡ 63f58c5d-4059-46ee-b9a8-3179ab195d7c
-@benchmark daytype_ternary(many_days, weekenddays)
+with_terminal() do
+	@btime daytype_ternary(many_days, weekenddays)
+end
 
 # ╔═╡ 94e4333f-a3ab-4089-9043-dad7b99fb0ed
 html"""<h4 style="color:blue">function <code>ifelse</code></h4>"""
 
 # ╔═╡ 360a8c5d-f552-43a7-b868-d4f28233990a
-@benchmark daytype_ifelse(many_days, weekenddays)
+with_terminal() do
+	@btime daytype_ifelse(many_days, weekenddays)
+end
 
 # ╔═╡ d070db0e-7494-474b-991a-25bcbd706bd4
 html"""<h2 style="color:red">Summary</h2>"""
@@ -268,7 +274,7 @@ The testing above indicates there is no significant difference in performance am
 # ╟─2bd5eecd-38cb-47f3-bbbc-cf77370591d4
 # ╠═96253069-6a5b-436f-9a81-c87c6fa04ae6
 # ╟─bd0c5981-f0d2-4e2b-abb2-c90641a1ff97
-# ╠═eb481f69-70ac-4fd9-9582-e4e865894b4e
+# ╠═4ea98725-9f15-4441-9778-1a7696828d38
 # ╟─2168caf2-ff72-43dd-81b9-bfbe4dc9bd32
 # ╠═63f58c5d-4059-46ee-b9a8-3179ab195d7c
 # ╟─94e4333f-a3ab-4089-9043-dad7b99fb0ed
