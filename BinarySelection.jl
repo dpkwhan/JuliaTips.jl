@@ -39,60 +39,6 @@ html"""
 		Conditional execution is supported by every programming language and the simplest form is <i>if statement</i>. This section focuses on the binary selection, which basically has two possible paths of execution.
 	</p>
 </article>
-
-<style>
-	article.firstparagraph p::first-letter {
-		font-size: 1.5em;
-		font-family: cursive;
-	}
-	
-	main {
-		margin: 0 auto;
-		max-width: 2000px;
-    	padding-left: max(160px, 10%);
-    	padding-right: max(160px, 10%);
-	}
-
-	/* For bullet point inside admonition */
-	pluto-output div.admonition .admonition-title ~ ul {
-		padding-left: 2.5em;
-	}
-
-	/* For block quote */
-	blockquote {
-		font-family: Georgia, serif;
-		position: relative;
-		margin: 0.0em;
-		padding: 0.5em 2em 0.5em 3em;
-	}
-	
-	blockquote:before {
-		font-family: Georgia, serif;
-		position: absolute;
-		font-size: 3em;
-		line-height: 1;
-		top: 0;
-		left: 0;
-		content: "\201C";
-	}
-	blockquote:after {
-		font-family: Georgia, serif;
-		position: absolute;
-		float:right;
-		font-size:3em;
-		line-height: 1;
-		right:0;
-		bottom:-0.5em;
-		content: "\201D";
-	}
-	blockquote footer {
-		padding: 0 2em 0 0;
-		text-align:right;
-	}
-	blockquote cite:before {
-		content: "\2013";
-	}
-</style>
 """
 
 # ╔═╡ 901290fd-d665-4573-89be-2693a42cbaa4
@@ -245,6 +191,63 @@ md"""
 The testing above indicates there is no significant difference in performance among the three approaches. The Julia Base documentation on [`ifelse`](https://docs.julialang.org/en/v1/base/base/#Core.ifelse) states that in some cases, using `ifelse` instead of an `if` statement can eliminate the branch in generated code and provide higher performance in tight loops.
 """
 
+# ╔═╡ bc004fd8-c3f6-41a5-8b76-7ac987be0f2e
+html"""
+<style>
+	article.firstparagraph p::first-letter {
+		font-size: 1.5em;
+		font-family: cursive;
+	}
+	
+	main {
+		margin: 0 auto;
+		max-width: 2000px;
+    	padding-left: max(160px, 10%);
+    	padding-right: max(160px, 10%);
+	}
+
+	/* For bullet point inside admonition */
+	pluto-output div.admonition .admonition-title ~ ul {
+		padding-left: 2.5em;
+	}
+
+	/* For block quote */
+	blockquote {
+		font-family: Georgia, serif;
+		position: relative;
+		margin: 0.0em;
+		padding: 0.5em 2em 0.5em 3em;
+	}
+	
+	blockquote:before {
+		font-family: Georgia, serif;
+		position: absolute;
+		font-size: 3em;
+		line-height: 1;
+		top: 0;
+		left: 0;
+		content: "\201C";
+	}
+	blockquote:after {
+		font-family: Georgia, serif;
+		position: absolute;
+		float:right;
+		font-size:3em;
+		line-height: 1;
+		right:0;
+		bottom:-0.5em;
+		content: "\201D";
+	}
+	blockquote footer {
+		padding: 0 2em 0 0;
+		text-align:right;
+	}
+	blockquote cite:before {
+		content: "\2013";
+	}
+</style>
+"""
+
 # ╔═╡ Cell order:
 # ╟─58895063-cb7a-4631-9f73-8ceebb9c7528
 # ╟─c1195b3f-0441-478a-845f-55a569996c70
@@ -281,3 +284,4 @@ The testing above indicates there is no significant difference in performance am
 # ╠═360a8c5d-f552-43a7-b868-d4f28233990a
 # ╟─d070db0e-7494-474b-991a-25bcbd706bd4
 # ╟─e9fb7b45-f07e-47b6-890b-0ba91c6e4582
+# ╟─bc004fd8-c3f6-41a5-8b76-7ac987be0f2e
