@@ -4,14 +4,23 @@
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ 4e0e1d7e-3d7c-4c26-92d4-54afa8f2c025
-using BenchmarkTools, PlutoUI
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : missing
+        el
+    end
+end
+
+# ╔═╡ 82a391a3-f50a-4b03-b19d-beef0d25ad15
+using BenchmarkTools, PlutoUI, HypertextLiteral
 
 # ╔═╡ 1bd9f079-ed17-4d5a-a8b0-dd4069c8acac
 md"# Pluto Tutorial"
 
 # ╔═╡ f897e51a-a9d1-4535-bbe7-2fa650aca172
-html"""<h2 style="color:red">Setup</h2>"""
+html"""<h2 style="color:red">Development setup</h2>"""
 
 # ╔═╡ 5573c41a-08d2-4e5d-a33b-bd0e8136eb69
 html"""<h3 style="color:green">Margin and page width</h3>"""
@@ -28,24 +37,16 @@ html"""
 </style>
 """
 
-# ╔═╡ 07ac5412-f4c6-47f4-9130-b1d022d551db
-html"""<h3 style="color:green">Cell width</h3>"""
-
-# ╔═╡ 906f2724-d0a6-41b2-9a50-0d062a37cb2b
-html"""
-<script>
-	const plutoCell = document.querySelector('pluto-cell');
-	const cellWidth = plutoCell.clientWidth || plutoCell.offsetWidth;
-	console.log(cellWidth);
-</script>
-"""
-
 # ╔═╡ 68d21800-22c4-44c9-80b2-4c9e52d1929e
 html"""<h3 style="color:green">Package manager</h3>"""
 
 # ╔═╡ af5bff7f-58d4-449f-8cde-d24ae9a83082
 md"""
-The built-in package manager allows us to use package directly, *i.e.*
+The built-in package manager in Pluto allows us to use package directly, *i.e.*
+
+```julia
+using BenchmarkTools, PlutoUI
+```
 """
 
 # ╔═╡ 25aee722-3f05-48f5-ae89-fd8e0c3644df
@@ -117,29 +118,112 @@ html"""
 
 # ╔═╡ 13b6b1fc-4f95-400c-af62-f0b19392d93e
 html"""
-<article class="firstparagraph">
-	<p>
-		Julia is a general-purpose, high-level, dynamic language, designed from the start to take advantage of techniques for executing dynamic languages at statically-compiled language speeds.
-	</p>
-</article>
+<article class="firstparagraph"><p>
+Julia is a general-purpose, high-level, dynamic language, designed from the start to take advantage of techniques for executing dynamic languages at statically-compiled language speeds.
+</p></article>
 """
 
 # ╔═╡ 44539e27-87a0-493d-af6d-ed2df07d73d5
 html"""<h2 style="color:red">Output Display</h2>"""
 
+# ╔═╡ b6e36974-b210-4a7d-ab39-f153bd581cac
+md"""
+Package [`PlutoUI`](https://github.com/fonsp/PlutoUI.jl) provides function `with_terminal` to capture all messages sent to `stdout`.
+"""
+
 # ╔═╡ 9170c6d5-d3c5-46d3-9cd8-fbabd77bfcf8
 with_terminal() do
-	@btime sum(1:1000000)
+	@btime sum(1:100000)
+end
+
+# ╔═╡ bf91edef-afac-4dfe-bc26-9f3e1ec75501
+with_terminal() do
+	dump(Meta.parse("1 + 1"))
+end
+
+# ╔═╡ ea7215c9-98d8-445d-bf56-2f4ed9470f56
+html"""<h2 style="color:red">Tips</h2>"""
+
+# ╔═╡ dacb53a7-877c-4aa7-8de0-e86c35d9df6f
+html"""<h3 style="color:green">Send value from JavaScript to Julia</h3>"""
+
+# ╔═╡ e1420477-cdb4-4c4e-9385-803257d46a35
+md"""
+Sometimes we need to use JavaScript to compute some values related to the browswer and then send it back to Julia for some other computations. In the example below, we retrieve the cell width and then assign it to a variable in Julia.
+"""
+
+# ╔═╡ 71d508d8-b03b-4b17-8f76-e6057837c19f
+CellWidth() = html"""
+<div>
+<script>
+	// Find the first Pluto cell
+	const plutoCell = document.querySelector('pluto-cell');
+	
+	// Retrieve the inner width if available otherwise use outer width
+	const cellWidth = plutoCell.clientWidth || plutoCell.offsetWidth;
+	
+	const div = currentScript.parentElement;
+	div.value = cellWidth;  // Set the initial value
+	div.dispatchEvent(new CustomEvent("input"));
+</script>
+</div>
+""";
+
+# ╔═╡ 7d6b0f49-8c31-49f5-a2ee-9fbb514e5c7c
+@bind cellWidth CellWidth()
+
+# ╔═╡ 728cb7b6-349d-4b00-a359-6fdb3e388888
+cellWidth
+
+# ╔═╡ ade2f7ae-016b-4794-8155-a93baa800397
+html"""<h3 style="color:green">Send value from Julia to JavaScript</h3>"""
+
+# ╔═╡ 04b5ef98-a9a5-4eb2-834c-b743c5ede6ba
+html"""<h4 style="color:blue">Use HypertextLiteral</h4>"""
+
+# ╔═╡ 1f544981-b580-4e5e-9803-3a4d0a2593dd
+md"""
+Package [`HypertextLiteral.jl`](https://github.com/MechanicalRabbit/HypertextLiteral.jl) allows us to interpolate Julia values into JavaScript. The cell width is printed out on the console of your [browser's built-in developer tools](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools).
+"""
+
+# ╔═╡ de8272fb-053d-4afc-af0a-0ff1a76e21ae
+@htl("""
+	<script>
+	const cellWidth = $(cellWidth);
+	console.log("Pluto cell width is ", cellWidth);
+	</script>
+""")
+
+# ╔═╡ f7c2c20a-fbf2-4208-854d-038231ea6d60
+html"""<h4 style="color:blue">Use built-in data transfer</h4>"""
+
+# ╔═╡ 5f9e8589-26c1-4bf8-856d-a95f5d115a26
+let
+	x = rand(UInt8, 10_000)
+	
+	d = Dict(
+		"some_raw_data" => x,
+		"wow" => 1000,
+	)
+	
+	HTML("""
+		<script>
+		const d = $(PlutoRunner.publish_to_js(d));
+		console.log(d);
+		</script>
+	""")
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
 BenchmarkTools = "~1.1.1"
+HypertextLiteral = "~0.9.0"
 PlutoUI = "~0.7.9"
 """
 
@@ -159,6 +243,11 @@ version = "1.1.1"
 [[Dates]]
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
+
+[[HypertextLiteral]]
+git-tree-sha1 = "72053798e1be56026b81d4e2682dbe58922e5ec9"
+uuid = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
+version = "0.9.0"
 
 [[InteractiveUtils]]
 deps = ["Markdown"]
@@ -244,11 +333,8 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 # ╟─f897e51a-a9d1-4535-bbe7-2fa650aca172
 # ╟─5573c41a-08d2-4e5d-a33b-bd0e8136eb69
 # ╠═38c31c2e-40e6-4122-996e-23931df7a745
-# ╟─07ac5412-f4c6-47f4-9130-b1d022d551db
-# ╠═906f2724-d0a6-41b2-9a50-0d062a37cb2b
-# ╠═68d21800-22c4-44c9-80b2-4c9e52d1929e
+# ╟─68d21800-22c4-44c9-80b2-4c9e52d1929e
 # ╟─af5bff7f-58d4-449f-8cde-d24ae9a83082
-# ╠═4e0e1d7e-3d7c-4c26-92d4-54afa8f2c025
 # ╟─25aee722-3f05-48f5-ae89-fd8e0c3644df
 # ╟─fb101abf-436e-4b38-838f-7b7c458e5018
 # ╟─4793c655-4dd2-4475-8e56-84b3f5cf8092
@@ -258,6 +344,21 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 # ╠═3c51588b-4f64-46fc-87b3-11a410fe3a41
 # ╟─13b6b1fc-4f95-400c-af62-f0b19392d93e
 # ╟─44539e27-87a0-493d-af6d-ed2df07d73d5
+# ╟─b6e36974-b210-4a7d-ab39-f153bd581cac
 # ╠═9170c6d5-d3c5-46d3-9cd8-fbabd77bfcf8
+# ╠═bf91edef-afac-4dfe-bc26-9f3e1ec75501
+# ╟─ea7215c9-98d8-445d-bf56-2f4ed9470f56
+# ╟─dacb53a7-877c-4aa7-8de0-e86c35d9df6f
+# ╟─e1420477-cdb4-4c4e-9385-803257d46a35
+# ╠═71d508d8-b03b-4b17-8f76-e6057837c19f
+# ╠═7d6b0f49-8c31-49f5-a2ee-9fbb514e5c7c
+# ╠═728cb7b6-349d-4b00-a359-6fdb3e388888
+# ╟─ade2f7ae-016b-4794-8155-a93baa800397
+# ╟─04b5ef98-a9a5-4eb2-834c-b743c5ede6ba
+# ╟─1f544981-b580-4e5e-9803-3a4d0a2593dd
+# ╠═de8272fb-053d-4afc-af0a-0ff1a76e21ae
+# ╟─f7c2c20a-fbf2-4208-854d-038231ea6d60
+# ╠═5f9e8589-26c1-4bf8-856d-a95f5d115a26
+# ╟─82a391a3-f50a-4b03-b19d-beef0d25ad15
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
