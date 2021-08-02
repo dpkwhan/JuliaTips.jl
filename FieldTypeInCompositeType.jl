@@ -42,7 +42,7 @@ end
 
 # ╔═╡ 591a952b-16dd-4b8c-b3ba-ef7a6328d039
 md"""
-Now, let's create another composite type `StructWithConcreteType` with a concrete type of `Float64` for field `x`.
+Now, let's create another composite type `StructWithConcreteType` with a concrete type of `Float64` for the field `x`.
 """
 
 # ╔═╡ c55b9ef5-f432-46f5-928d-f305cdc7fce5
@@ -50,12 +50,17 @@ struct StructWithConcreteType
 	x::Float64
 end
 
+# ╔═╡ 5572c1f6-db1f-4571-9be5-258b94379f9d
+md"""
+We first define a varaible `num_elements` to store the total number of instances of the composite types shown above.
+"""
+
 # ╔═╡ 06a22264-4b2c-4b68-bd4c-2c7ce45cd5be
 num_elements = 100_000;
 
 # ╔═╡ c701389a-2411-4c53-8436-9a3be7f7aa46
 md"""
-Let's compare the performance of the two composite types. We first generate $(format(num_elements, commas=true)) random numbers between 0 and 1 and count how many numbers are greater than 0.5.
+Let's compare the performance of the two composite types. We first generate $(format(num_elements, commas=true)) random numbers between 0 and 1, instantiates the composite type with these random numbers, and count how many numbers are greater than 0.5.
 """
 
 # ╔═╡ 1253f9dc-4cd8-481e-a5a8-81eea124a572
@@ -282,6 +287,7 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 # ╠═49c8e290-ad2d-4759-b33f-4267c6f43083
 # ╟─591a952b-16dd-4b8c-b3ba-ef7a6328d039
 # ╠═c55b9ef5-f432-46f5-928d-f305cdc7fce5
+# ╟─5572c1f6-db1f-4571-9be5-258b94379f9d
 # ╠═06a22264-4b2c-4b68-bd4c-2c7ce45cd5be
 # ╟─c701389a-2411-4c53-8436-9a3be7f7aa46
 # ╠═1253f9dc-4cd8-481e-a5a8-81eea124a572
